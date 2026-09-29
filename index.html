@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#101116">
+<meta name="description" content="Nyra — a quiet, minimal browser workspace.">
+<title>Nyra Browser</title>
+<style>
+:root{color-scheme:dark;--bg:#101116;--panel:#181a21;--panel2:#20222b;--line:#2d303b;--text:#f3f4f8;--muted:#9296a6;--accent:#b7a2ff;--accent2:#8d73ef}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text);font:15px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}button,input{font:inherit}button{cursor:pointer;color:inherit;border:0}button:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.app{min-height:100dvh;display:flex;flex-direction:column}.top{padding:12px 14px 0;background:#14151b;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5}.brandline{display:flex;align-items:center;gap:10px;padding:0 2px 12px}.logo{width:29px;height:29px;border-radius:10px;background:linear-gradient(145deg,#d1c5ff,#8e72ef);display:grid;place-items:center;color:#171321;font-weight:800;font-size:17px}.brand{font-size:16px;font-weight:700;letter-spacing:.2px}.tag{font-size:11px;color:var(--muted);margin-left:auto}.tabs{display:flex;align-items:center;gap:5px;overflow-x:auto;scrollbar-width:none}.tabs::-webkit-scrollbar{display:none}.tab{display:flex;align-items:center;gap:8px;max-width:210px;min-width:90px;padding:9px 10px;background:transparent;border-radius:9px 9px 0 0;color:var(--muted);font-size:13px;white-space:nowrap}.tab.active{background:var(--bg);color:var(--text)}.tabname{overflow:hidden;text-overflow:ellipsis}.x{color:var(--muted);font-size:17px;line-height:1;padding:0 2px;background:none}.newtab{flex:0 0 34px;background:transparent;color:var(--muted);font-size:20px;padding:4px;border-radius:8px}.toolbar{display:flex;align-items:center;gap:7px;padding:10px 0 12px}.tool{width:36px;height:36px;flex:0 0 36px;border-radius:10px;background:transparent;color:#c4c6d0;font-size:18px;display:grid;place-items:center}.tool:active,.tool:hover{background:var(--panel2)}.address{height:40px;min-width:0;flex:1;display:flex;align-items:center;gap:8px;background:#22242d;border:1px solid #30333e;border-radius:12px;padding:0 11px}.lock{color:var(--accent);font-size:14px}.address input{width:100%;min-width:0;background:transparent;border:0;outline:0;color:var(--text);font-size:14px}.address input:focus-visible{outline:0}.go{background:var(--accent);color:#171321;border-radius:9px;padding:7px 11px;font-size:13px;font-weight:700}.layout{display:flex;flex:1;min-height:0}.sidebar{width:66px;flex-shrink:0;border-right:1px solid var(--line);padding:14px 9px;display:flex;flex-direction:column;gap:7px;background:#14151b}.sidebtn{width:46px;min-height:44px;border-radius:12px;background:transparent;color:var(--muted);font-size:18px;display:grid;place-items:center;position:relative}.sidebtn.active,.sidebtn:hover{background:#282431;color:var(--accent)}.sidebtn span{font-size:9px;position:absolute;bottom:3px}.content{flex:1;min-width:0;position:relative;display:flex;flex-direction:column}.welcome{max-width:780px;width:100%;margin:0 auto;padding:clamp(28px,7vh,76px) 22px 40px}.hero{text-align:center;margin-bottom:30px}.hero-mark{width:62px;height:62px;margin:0 auto 16px;border-radius:21px;background:linear-gradient(145deg,#d1c5ff,#8e72ef);display:grid;place-items:center;color:#171321;font-weight:800;font-size:34px;box-shadow:0 12px 40px #8e72ef22}.hero h1{font-size:clamp(28px,5vw,40px);letter-spacing:-1.4px;margin:0 0 8px}.hero p{color:var(--muted);margin:0}.searchbox{display:flex;align-items:center;gap:10px;background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:8px 9px 8px 15px;box-shadow:0 12px 40px #0002}.searchbox input{flex:1;min-width:0;background:transparent;border:0;outline:0;color:var(--text);padding:9px 0}.searchbox button{background:var(--accent);color:#171321;font-weight:700;padding:10px 16px;border-radius:11px}.sectionhead{display:flex;align-items:center;justify-content:space-between;margin:28px 2px 12px}.sectionhead h2{font-size:13px;text-transform:uppercase;letter-spacing:1.1px;color:var(--muted);margin:0}.quiet{background:none;color:var(--muted);font-size:12px}.shortcuts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}.shortcut{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px 8px;display:flex;flex-direction:column;align-items:center;gap:8px;min-width:0}.shortcut:hover{border-color:#65578f;background:#201e29}.shortcut .ico{width:37px;height:37px;border-radius:12px;background:var(--panel2);display:grid;place-items:center;font-size:17px}.shortcut .label{font-size:12px;color:#d8d9e1;overflow:hidden;text-overflow:ellipsis;max-width:100%}.note{margin-top:26px;padding:13px 15px;background:#191821;border:1px solid #302b40;border-radius:12px;color:var(--muted);font-size:12px}.note strong{color:#d2c7ff}.view{display:none;flex:1;min-height:50vh}.view.show{display:flex;flex-direction:column}.framebar{padding:9px 13px;background:var(--panel);border-bottom:1px solid var(--line);display:flex;gap:10px;align-items:center;font-size:12px;color:var(--muted)}.framebar .current-url{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1}.external{background:var(--panel2);padding:7px 10px;border-radius:8px;color:var(--text);white-space:nowrap}.webframe{border:0;width:100%;flex:1;min-height:60vh;background:white}.empty-state{margin:auto;text-align:center;padding:28px;color:var(--muted)}.empty-state h2{color:var(--text);font-size:20px}.listview{padding:26px;max-width:800px;width:100%;margin:0 auto}.listview h2{margin-top:0}.entry{display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--line);padding:12px 0}.entry .entrymain{min-width:0;flex:1}.entry strong,.entry small{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.entry small{color:var(--muted);margin-top:3px}.entry button{background:var(--panel2);border-radius:8px;padding:7px 10px}.footer{padding:10px 14px;color:#777b8b;font-size:11px;text-align:center;border-top:1px solid #242630}
+@media(min-width:800px){.top{padding-left:20px;padding-right:20px}.toolbar{max-width:1000px;margin:0 auto;width:100%}.brandline{max-width:1000px;margin:0 auto}.tabs{max-width:1000px;margin:0 auto}.sidebar{width:74px;padding:18px 13px}.sidebtn{width:46px}.shortcuts{grid-template-columns:repeat(4,minmax(0,1fr))}.welcome{padding-top:8vh}}
+@media(max-width:430px){.tag{display:none}.toolbar{gap:4px}.tool{width:31px;flex-basis:31px}.address{padding:0 8px}.go{padding:7px 9px}.sidebar{width:52px;padding:12px 4px}.sidebtn{width:42px}.shortcuts{grid-template-columns:repeat(2,minmax(0,1fr))}.welcome{padding-left:15px;padding-right:15px}.tab{min-width:75px;padding:9px 7px}}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="top">
+  <div class="brandline"><div class="logo">N</div><div class="brand">Nyra</div><div class="tag">A quieter place to browse</div></div>
+  <div class="tabs" id="tabs"></div>
+  <div class="toolbar">
+    <button class="tool" id="back" title="Back" aria-label="Back">‹</button>
+    <button class="tool" id="forward" title="Forward" aria-label="Forward">›</button>
+    <button class="tool" id="reload" title="Reload" aria-label="Reload">↻</button>
+    <form class="address" id="navform"><span class="lock">◈</span><input id="url" aria-label="Address or search" placeholder="Search or enter address" autocomplete="off"><button class="go" type="submit">Go</button></form>
+    <button class="tool" id="bookmark" title="Bookmark this page" aria-label="Bookmark">☆</button>
+  </div>
+</header>
+<div class="layout">
+  <aside class="sidebar" aria-label="Navigation">
+    <button class="sidebtn active" data-page="home" title="New tab">⌂<span>Home</span></button>
+    <button class="sidebtn" data-page="bookmarks" title="Bookmarks">☆<span>Saved</span></button>
+    <button class="sidebtn" data-page="history" title="History">◷<span>History</span></button>
+  </aside>
+  <main class="content">
+    <section class="welcome" id="home">
+      <div class="hero"><div class="hero-mark">N</div><h1>Make room for focus.</h1><p>A little less noise. A little more you.</p></div>
+      <form class="searchbox" id="searchform"><span style="color:var(--muted)">⌕</span><input id="search" placeholder="Search the web or type a URL" aria-label="Search the web"><button type="submit">Search</button></form>
+      <div class="sectionhead"><h2>Quick links</h2><button class="quiet" id="editlinks">Edit links</button></div>
+      <div class="shortcuts" id="shortcuts"></div>
+      <div class="note"><strong>About this web version</strong><br>Nyra’s full browser engine is the desktop Electron app. This iPad-friendly web companion uses your browser’s built-in capabilities. Some websites prevent being displayed inside another page; use “Open in new tab” when that happens.</div>
+    </section>
+    <section class="view" id="browser"><div class="framebar"><span>◈</span><span class="current-url" id="frameurl"></span><button class="external" id="external">Open in new tab ↗</button></div><iframe class="webframe" id="webframe" title="Website preview" referrerpolicy="strict-origin-when-cross-origin" allow="fullscreen; clipboard-read; clipboard-write"></iframe></section>
+    <section class="view" id="bookmarks"><div class="listview"><h2>Bookmarks</h2><p style="color:var(--muted)">Your saved links, stored on this device.</p><div id="bookmarklist"></div></div></section>
+    <section class="view" id="history"><div class="listview"><h2>Recent history</h2><p style="color:var(--muted)">Pages opened from this Nyra web companion.</p><div id="historylist"></div><button class="external" id="clearhistory">Clear history</button></div></section>
+  </main>
+</div>
+<div class="footer">Nyra Web · Your links stay in this browser on this device</div>
+</div>
+<script>
+(() => {
+  const $ = id => document.getElementById(id);
+  const defaults = [
+    {name:'Wikipedia',url:'https://www.wikipedia.org',icon:'W'},
+    {name:'YouTube',url:'https://www.youtube.com',icon:'▶'},
+    {name:'DuckDuckGo',url:'https://duckduckgo.com',icon:'✳'},
+    {name:'GitHub',url:'https://github.com',icon:'⌘'}
+  ];
+  const read = (key, fallback) => { try { return JSON.parse(localStorage.getItem('nyra.'+key)) ?? fallback; } catch { return fallback; } };
+  let links = read('links', defaults), bookmarks = read('bookmarks', []), history = read('history', []), tabs = [{id:1,title:'New Tab',url:''}], active = 1, nextId = 2, currentUrl = '';
+  const save = (key, value) => { try { localStorage.setItem('nyra.'+key, JSON.stringify(value)); } catch {} };
+  function normalized(value) {
+    const text = value.trim(); if (!text) return '';
+    if (/^(https?:\/\/|file:|about:)/i.test(text)) return text;
+    if (/^(localhost|\d{1,3}(\.\d{1,3}){3})(:\d+)?([/]|$)/i.test(text) || (/^[\w.-]+\.[a-z]{2,}(:\d+)?([/?#]|$)/i.test(text) && !text.includes(' '))) return 'https://' + text;
+    return 'https://duckduckgo.com/?q=' + encodeURIComponent(text);
+  }
+  function renderTabs() {
+    $('tabs').innerHTML = '';
+    tabs.forEach(tab => {
+      const b = document.createElement('button'); b.className = 'tab'+(tab.id===active?' active':'');
+      const label = document.createElement('span'); label.className='tabname'; label.textContent=tab.title;
+      b.append(label);
+      if(tabs.length>1){const x=document.createElement('span');x.className='x';x.textContent='×';x.title='Close tab';x.onclick=e=>{e.stopPropagation();closeTab(tab.id)};b.append(x)}
+      b.onclick=()=>switchTab(tab.id); $('tabs').append(b);
+    });
+    const add=document.createElement('button');add.className='newtab';add.textContent='+';add.title='New tab';add.onclick=newTab;$('tabs').append(add);
+  }
+  function showPage(page) {
+    $('home').style.display=page==='home'?'block':'none';
+    ['browser','bookmarks','history'].forEach(id=>$(id).classList.toggle('show',id===page));
+    document.querySelectorAll('[data-page]').forEach(b=>b.classList.toggle('active',b.dataset.page===page));
+  }
+  function navigate(raw) {
+    const url=normalized(raw); if(!url)return;
+    const tab=tabs.find(t=>t.id===active); if(!tab)return;
+    tab.url=url; currentUrl=url; tab.title=labelFromUrl(url);
+    $('url').value=url; $('frameurl').textContent=url;
+    $('webframe').src=url; showPage('browser'); renderTabs();
+    history.unshift({url,title:tab.title,time:new Date().toISOString()}); history=history.slice(0,100);save('history',history);renderHistory();
+  }
+  function labelFromUrl(url) { try { return new URL(url).hostname.replace(/^www\./,'') || 'Website'; } catch { return 'Website'; } }
+  function switchTab(id) {
+    active=id;const tab=tabs.find(t=>t.id===id); if(!tab)return;
+    $('url').value=tab.url;$('frameurl').textContent=tab.url;
+    if(tab.url){$('webframe').src=tab.url;showPage('browser')}else{showPage('home');$('webframe').src='about:blank'}
+    renderTabs();
+  }
+  function newTab(){const id=nextId++;tabs.push({id,title:'New Tab',url:''});switchTab(id)}
+  function closeTab(id){if(tabs.length===1){tabs[0]={id:tabs[0].id,title:'New Tab',url:''};switchTab(tabs[0].id);return}const i=tabs.findIndex(t=>t.id===id);tabs=tabs.filter(t=>t.id!==id);if(active===id) switchTab(tabs[Math.max(0,i-1)].id);else renderTabs()}
+  function renderShortcuts(){ $('shortcuts').innerHTML='';links.forEach((link,i)=>{const b=document.createElement('button');b.className='shortcut';const icon=document.createElement('span');icon.className='ico';icon.textContent=link.icon||'↗';const label=document.createElement('span');label.className='label';label.textContent=link.name;b.append(icon,label);b.onclick=()=>navigate(link.url);$('shortcuts').append(b)}); }
+  function renderBookmarks(){const root=$('bookmarklist');root.innerHTML='';if(!bookmarks.length){root.innerHTML='<p style="color:var(--muted)">No bookmarks yet. Open a page and tap ☆ to save it.</p>';return}bookmarks.forEach((item,i)=>{const row=document.createElement('div');row.className='entry';const main=document.createElement('div');main.className='entrymain';const title=document.createElement('strong');title.textContent=item.title;const url=document.createElement('small');url.textContent=item.url;main.append(title,url);const open=document.createElement('button');open.textContent='Open';open.onclick=()=>navigate(item.url);const remove=document.createElement('button');remove.textContent='Remove';remove.onclick=()=>{bookmarks.splice(i,1);save('bookmarks',bookmarks);renderBookmarks()};row.append(main,open,remove);root.append(row)})}
+  function renderHistory(){const root=$('historylist');root.innerHTML='';if(!history.length){root.innerHTML='<p style="color:var(--muted)">Nothing here yet.</p>';return}history.slice(0,30).forEach(item=>{const row=document.createElement('div');row.className='entry';const main=document.createElement('div');main.className='entrymain';const title=document.createElement('strong');title.textContent=item.title;const url=document.createElement('small');url.textContent=item.url;main.append(title,url);const open=document.createElement('button');open.textContent='Open';open.onclick=()=>navigate(item.url);row.append(main,open);root.append(row)})}
+  $('navform').onsubmit=e=>{e.preventDefault();navigate($('url').value)};
+  $('searchform').onsubmit=e=>{e.preventDefault();navigate($('search').value)};
+  $('external').onclick=()=>{if(currentUrl)window.open(currentUrl,'_blank','noopener,noreferrer')};
+  $('bookmark').onclick=()=>{const tab=tabs.find(t=>t.id===active);if(!tab||!tab.url){showPage('bookmarks');return}const i=bookmarks.findIndex(b=>b.url===tab.url);if(i>=0){bookmarks.splice(i,1);$('bookmark').textContent='☆'}else{bookmarks.unshift({title:tab.title,url:tab.url});$('bookmark').textContent='★'}save('bookmarks',bookmarks);renderBookmarks()};
+  $('back').onclick=()=>{try{ $('webframe').contentWindow.history.back() }catch{}};
+  $('forward').onclick=()=>{try{ $('webframe').contentWindow.history.forward() }catch{}};
+  $('reload').onclick=()=>{try{$('webframe').contentWindow.location.reload()}catch{if(currentUrl)$('webframe').src=currentUrl}};
+  document.querySelectorAll('[data-page]').forEach(b=>b.onclick=()=>{showPage(b.dataset.page);if(b.dataset.page==='bookmarks')renderBookmarks();if(b.dataset.page==='history')renderHistory()});
+  $('clearhistory').onclick=()=>{history=[];save('history',history);renderHistory()};
+  $('editlinks').onclick=()=>{const name=prompt('Name for the new quick link:');if(!name)return;const url=prompt('Website address (for example, https://example.com):');if(!url)return;const clean=normalized(url);if(!clean)return;links.push({name,url:clean,icon:name.slice(0,1).toUpperCase()});save('links',links);renderShortcuts()};
+  renderTabs();renderShortcuts();renderBookmarks();renderHistory();
+})();
+</script>
+</body>
+</html>
