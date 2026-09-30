@@ -55,7 +55,8 @@
     {name:'Wikipedia',url:'https://www.wikipedia.org',icon:'W'},
     {name:'YouTube',url:'https://www.youtube.com',icon:'▶'},
     {name:'DuckDuckGo',url:'https://duckduckgo.com',icon:'✳'},
-    {name:'GitHub',url:'https://github.com',icon:'⌘'}
+    {name:'GitHub',url:'https://github.com',icon:'⌘'},
+    {name:'55GMS',url:'https://55gms.com',icon:'🎮'}
   ];
   const read = (key, fallback) => { try { return JSON.parse(localStorage.getItem('nyra.'+key)) ?? fallback; } catch { return fallback; } };
   let links = read('links', defaults), bookmarks = read('bookmarks', []), history = read('history', []), tabs = [{id:1,title:'New Tab',url:''}], active = 1, nextId = 2, currentUrl = '';
@@ -103,7 +104,7 @@
   }
   function newTab(){const id=nextId++;tabs.push({id,title:'New Tab',url:''});switchTab(id)}
   function closeTab(id){if(tabs.length===1){tabs[0]={id:tabs[0].id,title:'New Tab',url:''};switchTab(tabs[0].id);return}const i=tabs.findIndex(t=>t.id===id);tabs=tabs.filter(t=>t.id!==id);if(active===id) switchTab(tabs[Math.max(0,i-1)].id);else renderTabs()}
-  function renderShortcuts(){ $('shortcuts').innerHTML='';links.forEach((link,i)=>{const b=document.createElement('button');b.className='shortcut';const icon=document.createElement('span');icon.className='ico';icon.textContent=link.icon||'↗';const label=document.createElement('span');label.className='label';label.textContent=link.name;b.append(icon,label);b.onclick=()=>navigate(link.url);$('shortcuts').append(b)}); }
+  function renderShortcuts(){ $('shortcuts').innerHTML='';links.forEach((link,i)=>{const b=document.createElement('button');b.className='shortcut';const icon=document.createElement('span');icon.className='ico';icon.textContent=link.icon||'↗';const label=document.createElement('span');label.className='label';label.textContent=link.name;b.append(icon,label);b.onclick=()=>{if(link.name==='55GMS'){window.open(link.url,'_blank','noopener,noreferrer')}else{navigate(link.url)}};$('shortcuts').append(b)}); }
   function renderBookmarks(){const root=$('bookmarklist');root.innerHTML='';if(!bookmarks.length){root.innerHTML='<p style="color:var(--muted)">No bookmarks yet. Open a page and tap ☆ to save it.</p>';return}bookmarks.forEach((item,i)=>{const row=document.createElement('div');row.className='entry';const main=document.createElement('div');main.className='entrymain';const title=document.createElement('strong');title.textContent=item.title;const url=document.createElement('small');url.textContent=item.url;main.append(title,url);const open=document.createElement('button');open.textContent='Open';open.onclick=()=>navigate(item.url);const remove=document.createElement('button');remove.textContent='Remove';remove.onclick=()=>{bookmarks.splice(i,1);save('bookmarks',bookmarks);renderBookmarks()};row.append(main,open,remove);root.append(row)})}
   function renderHistory(){const root=$('historylist');root.innerHTML='';if(!history.length){root.innerHTML='<p style="color:var(--muted)">Nothing here yet.</p>';return}history.slice(0,30).forEach(item=>{const row=document.createElement('div');row.className='entry';const main=document.createElement('div');main.className='entrymain';const title=document.createElement('strong');title.textContent=item.title;const url=document.createElement('small');url.textContent=item.url;main.append(title,url);const open=document.createElement('button');open.textContent='Open';open.onclick=()=>navigate(item.url);row.append(main,open);root.append(row)})}
   $('navform').onsubmit=e=>{e.preventDefault();navigate($('url').value)};
